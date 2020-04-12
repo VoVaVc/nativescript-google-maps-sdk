@@ -511,6 +511,14 @@ export class MapView extends MapViewBase {
         this.gMap.clear();
     }
 
+    snapshot(callback: Function) {
+        if(!this.gMap) return null;
+        const SnapshotReadyCallback = new com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback({
+            onSnapshotReady: callback
+        })
+        this.gMap.snapshot(SnapshotReadyCallback);
+    }
+
 }
 
 export class UISettings extends UISettingsBase {
@@ -1294,5 +1302,11 @@ export class Circle extends CircleBase {
     set android(android) {
         this._android = android;
         this._isReal = android.getClass().getName() === Circle.CLASS;
+    }
+}
+
+export class Screenshot {
+    onSnapshotReady() {
+        new com.google.android.gms.maps.SnapshotReadyCallback
     }
 }
